@@ -1,45 +1,52 @@
-# Projet E2E – Playwright + POM + Gherkin (Cucumber)
+# Projet BDD – Playwright + Cucumber (TypeScript)
 
 ## Site choisi
-- **TodoMVC (Playwright demo)** : https://demo.playwright.dev/todomvc/#/
-- Application publique, simple, avec interactions (ajout/complétion/édition/suppression/filtrage) et plusieurs parcours.
+- **Nike (France)** : https://www.nike.com/fr/
 
-## Scénarios testés (BDD)
-Fichier : `tests/features/gestion-taches.feature`
-1. Ajouter des tâches et vérifier le compteur
-2. Compléter une tâche puis supprimer les tâches complétées
-3. Filtrer les tâches **Active** / **Completed**
-4. Modifier (éditer) une tâche
-5. Supprimer une tâche
+## Scénarios testés
 
-## Structure
-- `tests/features/` : scénarios Gherkin
-- `tests/steps/` : steps Cucumber
-- `tests/pages/` : Page Objects (POM)
-- `tests/support/` : World + Hooks (setup/teardown Playwright)
+### Scénario 1 — Recherche produit et ouverture de la fiche
+- Accéder à la page d’accueil Nike
+- Accepter la bannière cookies (si présente)
+- Rechercher un produit (ex. "Vomero")
+- Vérifier que des résultats s’affichent
+- Ouvrir le premier résultat
+- Vérifier que le **titre** et le **prix** du produit sont visibles
+
+### Scénario 2 — Tentative de connexion avec identifiants invalides (échec attendu)
+- Accéder à la page de connexion Nike
+- Renseigner un e-mail invalide
+- Cliquer sur **Continuer**
+- Renseigner un mot de passe invalide
+- Cliquer sur le bouton de connexion
+- Vérifier qu’un **message d’erreur** apparaît (connexion refusée)
+
+### Scénario 3 — Ajout au panier via recherche
+- Accéder à la page d’accueil Nike
+- Accepter la bannière cookies (si présente)
+- Rechercher le mot-clé **"ballon"**
+- Ouvrir le premier résultat
+- Sélectionner une taille si nécessaire (selon l’article)
+- Cliquer sur **Ajouter au panier**
+- Ouvrir le panier et vérifier qu’au moins **un article** est présent
 
 ## Installation
+Prérequis : **Node.js LTS** + npm
+
+Vérifier l’installation :
 ```bash
+node -v
+npm -v
+
+Installer les dépendances :
 npm install
+
+Installer les navigateurs Playwright:
 npx playwright install
-```
 
-## Exécution
-### Scénarios BDD (Cucumber)
-```bash
+
+Installer les navigateurs Playwright :
 npm run bdd
-```
 
-### Mode visible (headed)
-Sur macOS/Linux :
-```bash
+Lancer les scénarios Cucumber avec navigateur visible :
 npm run bdd:headed
-```
-Sur Windows (PowerShell) :
-```powershell
-$env:HEADLESS="0"; npm run bdd
-```
-
-## Notes / difficultés
-- TodoMVC persiste les tâches via **localStorage** : on le vide automatiquement au début de chaque scénario (voir `TodoPage.open()`) pour garantir l'indépendance des tests.
-- Le dépôt doit rester propre : `node_modules/` et les rapports Playwright sont ignorés via `.gitignore`.
