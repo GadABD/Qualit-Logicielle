@@ -1,0 +1,8 @@
+{
+  "default": {
+    "requireModule": ["ts-node/register"],
+    "require": ["tests/support/**/*.ts", "tests/steps/**/*.ts"],
+    "paths": ["tests/features/**/*.feature"],
+    "format": ["@cucumber/pretty-formatter", "progress"]
+  }
+}
