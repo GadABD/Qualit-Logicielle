@@ -1,0 +1,23 @@
+{
+  "name": "chapitre-3",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "bdd": "cucumber-js --config cucumber.json",
+    "bdd:headed": "cross-env HEADLESS=0 SLOWMO=200 cucumber-js --config cucumber.json",
+    "pw:test": "playwright test",
+    "pw:report": "playwright show-report"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@cucumber/cucumber": "^12.2.0",
+    "@playwright/test": "^1.56.1",
+    "@types/node": "^24.10.0",
+    "cross-env": "^10.1.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
+  }
+}
